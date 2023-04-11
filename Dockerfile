@@ -1,6 +1,6 @@
 FROM rockylinux:9.0
 
-LABEL org.opencontainers.image.authors="Sean Cline <smcline06@gmail.com>"
+LABEL org.opencontainers.image.authors="Juergen Schreiner <juergern.sch@gmail.com>"
 
 EXPOSE 80 443
 
@@ -66,12 +66,16 @@ RUN \
     php php-xml php-session php-sockets php-ldap php-gd \
     php-json php-mysqlnd php-gmp php-mbstring php-posix \
     php-snmp php-intl php-common php-cli php-devel php-pear \
-    php-pdo && \
+    php-pdo \
+    python3 python-pip && \
     yum install -y \
     rrdtool net-snmp net-snmp-utils cronie mariadb autoconf \
     bison openssl openldap mod_ssl net-snmp-libs automake \
     gcc gzip libtool make net-snmp-devel dos2unix m4 which \
     openssl-devel mariadb-devel sendmail curl wget help2man perl-libwww-perl && \
+    pip --no-input install requests && \
+    pip --no-input install lxml && \
+    pip --no-input install fritzconnection && \
     yum clean all && \
     rm -rf /var/cache/yum/* && \
     chmod 0644 /etc/crontab && \
